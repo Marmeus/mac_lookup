@@ -11,7 +11,7 @@ gexclusive = gmandatory.add_mutually_exclusive_group(required=True)
 gexclusive.add_argument("-m", "--mac", type=str, help="MAC address to locate")
 gexclusive.add_argument("-f", "--file", type=str, help="File path with MAC addresses to be located (One per line)")
 parser.add_argument("-o", "--output",type=str, required=False, help="Store the output into a file")
-parser.add_argument("-F", "--format", choices=['TEXT','JSON'], type=str, default='TEXT', required=False, help="Output format. Default: TEXT")
+parser.add_argument("-F", "--format", choices=['NORMAL','JSON'], type=str, default='NORMAL', required=False, help="Output format. Default: NORMAL")
 args = parser.parse_args()
 
 #API base url,you can also use https if you need
@@ -66,8 +66,8 @@ else :
     res = macs_from_file(mac_addresses_file)
 
 # Checks the format
-if output_format == "TEXT":
-    output = print_data(res)
+if output_format == "NORMAL":
+    output = print_data(res)[:-1]
 else:
     output = json.dumps(res)
 
